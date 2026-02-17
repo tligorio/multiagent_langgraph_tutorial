@@ -14,7 +14,7 @@ The system consists of four specialized agents:
 
 ## Workflow
 
-<img src="./images/multiagent.png" alt="Multiagent System - local" width="40%">
+<img src="./images/multiagent.png" alt="Multiagent System - local" width="50%">
 
 ## Stopping Criteria
 
