@@ -14,40 +14,7 @@ The system consists of four specialized agents:
 
 ## Workflow
 
-```
-                         ┌─────────────────┐
-                         │      START      │
-                         └────────┬────────┘
-                                  │
-                                  ▼
-                         ┌─────────────────┐
-                         │  Search Agent   │◄───────────────┐
-                         │ (arXiv/Scholar) │                │
-                         └────────┬────────┘                │
-                                  │                         │
-                                  ▼                         │
-                         ┌─────────────────┐                │
-                         │  Filter Agent   │                │
-                         │ (evaluate rel.) │                │
-                         └────────┬────────┘                │
-                                  │                         │
-                                  ▼                         │
-                         ┌─────────────────┐                │
-                         │   Supervisor    │                │
-                         │    Agent        │                │
-                         └────────┬────────┘                │
-                                  │                         │
-                    ┌─────────────┴─────────────┐           │
-                    │                           │           │
-          (≥3 papers with                (needs more        │
-           relevance ≥0.7)                results)          │
-                    │                           │           │
-                    ▼                           ▼           │
-           ┌───────────────┐          ┌─────────────────┐   │
-           │      END      │          │ Query Refinement│───┘
-           │ (return results)         │     Agent       │
-           └───────────────┘          └─────────────────┘
-```
+<img src="./images/multiagent.png" alt="Multiagent System - local" width="40%">
 
 ## Stopping Criteria
 
