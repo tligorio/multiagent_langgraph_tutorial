@@ -1,0 +1,20 @@
+[project]
+name = "multiagent-langgraph-tutorial"
+version = "0.1.0"
+description = "A multi-agent research assistant using LangGraph to find and filter academic papers"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "langgraph>=0.2.0",
+    "langchain>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "arxiv>=2.0.0",
+    "scholarly>=1.7.0",
+    "python-dotenv>=1.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.0.0",
+    "jupyter>=1.0.0",
+]
