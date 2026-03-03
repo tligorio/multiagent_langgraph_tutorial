@@ -27,7 +27,7 @@ Otherwise, the Query Refinement Agent generates an improved query and the search
 
 ### Option 1: Run in Google Colab (Recommended for quick start)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tligorio/multiagent_langgraph_tutorial/blob/main/Multiagent_LangChain.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/tligorio/multiagent_langgraph_tutorial/blob/main/Multiagent_Graph.ipynb)
 
 Click the badge above to open the notebook directly in Google Colab.
 
