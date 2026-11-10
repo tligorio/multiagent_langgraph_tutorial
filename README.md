@@ -1,27 +1,33 @@
 # Multi-Agent Research Assistant with LangGraph
 #### Tiziana Ligorio for *AI Agents - CSCI 395.32* taught at Hunter College of The City University of New York
 
-In this tutorial, we build a research assistant that uses multiple agents to streamline the process of finding and filtering academic research papers. This demonstrates a multi-agent system using the LangGraph framework.
+In this tutorial we build a research assistant that answers **comparison questions** from the scientific literature on arXiv: questions that ask how several methods, techniques, or approaches compare. Each approach is researched by its own subagent, in parallel, and the answer is a short comparison table with supporting papers. The system is built with **LangGraph** and compared against a single agent that does the same job alone.
 
-## System Architecture
+## How it works
 
-The system consists of four specialized agents:
+```mermaid
+graph LR
+    START([start]) --> plan
+    plan -. one Send per brief .-> research["research (×N, in parallel)"]
+    research --> check
+    check -. approach left with no papers: retry once .-> research
+    check --> write
+    write --> END([end])
+```
 
-1. **Search Agent** — Queries Google Scholar and/or arXiv to find academic papers matching the user's query
-2. **Filter Agent** — Evaluates the relevance of retrieved papers and adds relevant ones to the filtered papers list in the state
-3. **Query Refinement Agent** — Refines the search query to improve results when the current query yields insufficient relevant papers
-4. **Supervisor Agent** — Decides whether the workflow should finalize (enough relevant papers found) or continue refining the query
+1. **plan** splits the question into one brief per approach.
+2. **research** runs one subagent per brief, in parallel. Each searches arXiv in its own context and returns one row of the table.
+3. **check** (plain code) removes any citation that did not come from that researcher's own searches, and sends back an approach left with no papers.
+4. **write** reads all the rows and writes a short summary.
 
-## Workflow
+## What you will learn
 
-<img src="./images/multiagent.png" alt="Multiagent System - local" width="50%">
+1. When a task justifies more than one agent, and how to measure what the split costs against a single-agent baseline.
+2. How to build a LangGraph graph: shared state, reducers, nodes, edges, conditional edges, and parallel branches with `Send`.
+3. How to use agents as nodes: research subagents built with `create_agent`, each with its own brief, tool, and isolated context.
+4. How to read the trace of a parallel run, and how to compare the system with a single agent.
 
-## Stopping Criteria
-
-The Supervisor Agent finalizes the workflow when:
-- At least **3 papers** have been identified with a **relevance score ≥ 0.7**
-
-Otherwise, the Query Refinement Agent generates an improved query and the search process iterates.
+The tutorial uses `openai/gpt-4.1-mini` through [OpenRouter](https://openrouter.ai) and the free [arXiv API](https://info.arxiv.org/help/api/index.html). Search results are cached in `arxiv_cache.json`, so reruns are fast and do not depend on arXiv's rate limits.
 
 ## Getting Started
 
